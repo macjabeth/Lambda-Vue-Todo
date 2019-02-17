@@ -6,34 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue Todo</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script defer src="main.js"></script>
 </head>
 
 <body>
   <div id="app">
+    <h1>todos</h1>
+
+    <form class="todo-form" @submit="submit">
+      <input
+        type="text" v-model="input"
+        :placeholder="[searching ? 'Filter...' : 'What needs to be done?']"
+        autocomplete="off" required>
+
+      <i class="fas fa-search" :class="{enabled: searching}" @click="search" title="Filter Results"></i>
+      <i class="far fa-trash-alt" @click="clear" title="Clear Completed Tasks"></i>
+    </form>
+
     <ul class="todo-list">
-      <li class="todo" v-for="todo in todos">
-        {{todo.task}}
-      </li>
+      <task
+        v-for="todo in todos" :key="todo.id"
+        v-if="(searching && todo.task.includes(input)) || !searching"
+        @edit-todo="edit($event)"
+        :todo="todo" :complete="complete"
+      ></task>
     </ul>
   </div>
-
-  <script>
-    const app = new Vue({
-      el: '#app',
-      data: {
-        todos: [{
-          task: 'Organize Garage',
-          id: 1528817077286,
-          completed: false
-        }, {
-          task: 'Bake Cookies',
-          id: 1528817084358,
-          completed: false
-        }]
-      }
-    });
-  </script>
 </body>
 
 </html>
