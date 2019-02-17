@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Todo</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <ul class="todo-list">
+      <li class="todo" v-for="todo in todos">
+        {{todo.task}}
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [{
+          task: 'Organize Garage',
+          id: 1528817077286,
+          completed: false
+        }, {
+          task: 'Bake Cookies',
+          id: 1528817084358,
+          completed: false
+        }]
+      }
+    });
+  </script>
+</body>
+
+</html>
