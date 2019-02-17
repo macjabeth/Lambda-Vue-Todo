@@ -19,20 +19,7 @@ Vue.component('task', {
     },
     enter() { this.hovering = true },
     leave() { this.hovering = false }
-  },
-  template: `
-    <li :class="{completed: todo.completed}" @click="complete(todo.id, editing)" @mouseenter="enter" @mouseleave="leave">
-      <div v-if="editing">
-        <form @submit="submit">
-          <input v-model="input" ref="input">
-        </form>
-      </div>
-      <template v-else>
-        <span>{{todo.task}}</span>
-      </template>
-      <i class="far fa-edit" :class="{display: hovering}" @click="edit" title="Edit"></i>
-    </li>
-  `
+  }
 });
 
 const app = new Vue({
