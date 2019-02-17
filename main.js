@@ -10,7 +10,7 @@ Vue.component('task', {
       event.stopPropagation();
       this.editing = !this.editing;
       this.input = this.todo.task;
-      this.$nextTick(() => this.$refs.input.focus());
+      this.$nextTick(() => this.$refs.input[0].focus());
     },
     submit(event) {
       event.preventDefault();
@@ -27,11 +27,7 @@ const app = new Vue({
   data: () => ({
     input: '',
     searching: false,
-    todos: [{
-      task: 'Bake Cookies',
-      id: Date.now(),
-      completed: false
-    }]
+    todos: []
   }),
   methods: {
     submit(event) {
@@ -71,5 +67,16 @@ const app = new Vue({
     clear() {
       this.todos = this.todos.filter(todo => !todo.completed);
     }
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler() {
+        localStorage.setItem('todos', JSON.stringify(this.todos));
+      }
+    }
+  },
+  mounted() {
+    this.todos = JSON.parse(localStorage.getItem('todos') || '[]');
   }
 });
