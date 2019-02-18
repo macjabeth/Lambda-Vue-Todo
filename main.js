@@ -5,16 +5,19 @@ Vue.component('task', {
     hovering: false,
     input: ''
   }),
+  computed: {
+    completedStyle() {
+      return { completed: this.todo.completed };
+    }
+  },
   methods: {
     edit(event) {
-      event.stopPropagation();
       this.editing = !this.editing;
       this.input = this.todo.task;
       this.$nextTick(() => this.$refs.input[0].focus());
     },
-    submit(event) {
-      event.preventDefault();
-      this.$emit('edit-todo', [ this.todo.id, this.input ]);
+    submit() {
+      this.$emit('edit', [ this.todo.id, this.input ]);
       this.editing = false;
     },
     enter() { this.hovering = true },
@@ -29,10 +32,19 @@ const app = new Vue({
     searching: false,
     todos: []
   }),
+  computed: {
+    placeholder() {
+      return this.searching ? 'Filter...' : 'What needs to be done?';
+    },
+    filter() {
+      return (todo) => (this.searching && todo.task.includes(this.input)) || !this.searching;
+    },
+    searchStyle() {
+      return { active: this.searching };
+    }
+  },
   methods: {
-    submit(event) {
-      event.preventDefault()
-
+    submit() {
       this.todos.push({
         task: this.input,
         id: Date.now(),

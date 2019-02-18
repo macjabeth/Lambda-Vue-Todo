@@ -59,7 +59,7 @@ h1 {
   color: #fff;
 }
 
-.todo-form > i.enabled {
+.todo-form > i.active {
   color: #556b2f;
 }
 
@@ -92,19 +92,18 @@ h1 {
   text-decoration-color: initial;
 }
 
-.todo-list > li > .fa-edit {
+.todo-list > li > i {
   color: #ccc;
-  display: none;
   position: absolute;
   right: 10px;
 }
 
-.todo-list > li > .fa-edit:hover {
+.todo-list > li > i:hover {
   color: #fff;
 }
 
-.todo-list > li > .fa-edit.display {
-  display: block;
+.todo-list > li > i.fa-edit {
+  right: 30px;
 }
 
 .todo-list > li input {
