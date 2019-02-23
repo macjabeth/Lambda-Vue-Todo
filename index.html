@@ -6,34 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue Todo</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script defer src="main.js"></script>
 </head>
 
 <body>
   <div id="app">
-    <ul class="todo-list">
-      <li class="todo" v-for="todo in todos">
-        {{todo.task}}
-      </li>
+    <h1>todos</h1>
+
+    <form class="todo-form" @submit.prevent="submit">
+      <input type="text" v-model="input" :placeholder="placeholder" autocomplete="off" required>
+      <i :class="['fas fa-search', searchStyle]" @click="search" title="Filter Results"></i>
+      <i class="far fa-trash-alt" @click="clear" title="Clear Completed Tasks"></i>
+    </form>
+
+    <ul class="todo-list" v-if="todos.length">
+      <task v-for="(todo, index) in todos" :todo="todo" :key="todo.id" :complete="complete"
+        v-if="filter(todo)" @edit="edit($event)" @delete="todos.splice(index, 1)" inline-template>
+        <li :class="completedStyle" @click="complete(todo.id, editing)" @mouseenter="enter" @mouseleave="leave">
+          <template v-if="editing">
+            <form @submit.prevent="submit">
+              <input v-model="input" ref="input">
+            </form>
+          </template>
+          <template v-else>
+            <span>{{todo.task}}</span>
+          </template>
+          <i class="far fa-edit" v-show="hovering" @click.stop="edit" title="Edit"></i>
+          <i class="fas fa-ban" v-show="hovering" @click.stop="$emit('delete')" title="Delete"></i>
+        </li>
+      </task>
     </ul>
   </div>
-
-  <script>
-    const app = new Vue({
-      el: '#app',
-      data: {
-        todos: [{
-          task: 'Organize Garage',
-          id: 1528817077286,
-          completed: false
-        }, {
-          task: 'Bake Cookies',
-          id: 1528817084358,
-          completed: false
-        }]
-      }
-    });
-  </script>
 </body>
 
 </html>

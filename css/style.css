@@ -1,0 +1,116 @@
+@import 'reset.css';
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: #1a1b1f;
+  color: #e8e7e3;
+  line-height: 1.5;
+}
+
+#app {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 5rem;
+}
+
+.todo-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.todo-form > input {
+  background-color: #17181c;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #525252;
+  padding: 1em 2em;
+  width: 100%;
+  outline: none;
+}
+
+.todo-form > input::placeholder {
+  color: #fff;
+}
+
+.todo-form > i {
+  color: #ccc;
+  cursor: pointer;
+  position: absolute;
+  transition: 100ms;
+  right: 40px;
+}
+
+.todo-form > i:last-child {
+  right: 15px;
+}
+
+.todo-form > i:hover {
+  color: #fff;
+}
+
+.todo-form > i.active {
+  color: #556b2f;
+}
+
+.todo-list {
+  margin: 10px 0;
+}
+
+.todo-list > li {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #525252;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #1b1d22;
+  transition: 250ms;
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+}
+
+.todo-list > li:nth-child(even) {
+  background-color: #1f2228;
+}
+
+.todo-list > li.completed {
+  text-decoration-color: initial;
+}
+
+.todo-list > li > i {
+  color: #ccc;
+  position: absolute;
+  right: 10px;
+}
+
+.todo-list > li > i:hover {
+  color: #fff;
+}
+
+.todo-list > li > i.fa-edit {
+  right: 30px;
+}
+
+.todo-list > li input {
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  text-align: center;
+  font-size: inherit;
+}
